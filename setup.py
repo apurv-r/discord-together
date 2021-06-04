@@ -1,9 +1,5 @@
 from setuptools import setup
 
-requirements = []
-with open('requirements.txt') as f:
-  requirements = f.read().splitlines()
-
 readme = ''
 with open("README.md", "r", encoding="utf-8") as fh:
     readme = fh.read()
@@ -23,7 +19,9 @@ setup(name='discordTogether',
       long_description=readme,
       long_description_content_type="text/markdown",
       include_package_data=True,
-      install_requires=requirements,
+      install_requires=[
+        "requests", 
+      ],
       keywords = ['discordpy','discord.py','discord together','discord party games','party games','discord activities','discord','discord ext','discord modules'],
       python_requires='>=3.8.0',
       classifiers=[
