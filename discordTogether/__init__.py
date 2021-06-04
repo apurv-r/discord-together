@@ -1,0 +1,1 @@
+from discordTogether.discordTogetherMain import DiscordTogether
