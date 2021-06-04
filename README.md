@@ -1,8 +1,8 @@
 <center>
 <h1><strong>Discord Together</strong></h1>
 
-[![Generic badge](https://img.shields.io/badge/Made%20for-discord.py-blue)](https://shields.io/)
-
+![PyPI - Downloads](https://img.shields.io/pypi/dm/discordTogether?style=for-the-badge)
+![Made for discord.py](https://img.shields.io/badge/Made%20for-discord.py-blue?style=for-the-badge&logo=appveyor)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 </center>
@@ -15,18 +15,15 @@
 pip install discordTogether
 ```
 
-## Install [discord.py](https://pypi.org/project/discord.py/)
-```
-pip install discord.py
-```
+#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [requests](https://pypi.org/project/requests/)
+<br/>
 
 # 🔑 Features
 - Easy to use
 - Dynamic
+- Actively maintained
 - [discord.py](https://pypi.org/project/discord.py/) support
 - Lightweight
-
-### <u>Documentation ➩ coming soon!</u>
 
 <br/>
 
@@ -34,40 +31,47 @@ pip install discord.py
 This is a simple example of code using this package.
 
 ```py
-pass
+import discord
+from discordTogether import DiscordTogether
+
+client = discord.Client(prefix="~")
+togetherControls = DiscordTogether(client)
+
+@client.event
+async def on_ready():
+    print(f"Bot logged into {client.user}.")
+
+@client.command()
+async def startYT(ctx):
+    link = togetherControls.create_link(ctx.author.voice.channel.id, 'youtube')
+    await ctx.send(f"Click the blue link!\n{link}")
 ```
 <br/>
 
 # 🔧 Options
-- Youtube
+- **Youtube**
 ```py
-pass
+link = togetherControls.create_link(ctx.author.voice.channel.id, 'youtube')
 ```
 
-- Poker
+- **Poker**
 ```py
-pass
+link = togetherControls.create_link(ctx.author.voice.channel.id, 'poker')
 ```
 
-- Chess
+- **Chess**
 ```py
-pass
-```
-```
-
-- Betrayal
-```py
-pass
+link = togetherControls.create_link(ctx.author.voice.channel.id, 'chess')
 ```
 
-- Fishing
+- **Betrayal**
 ```py
-pass
+link = togetherControls.create_link(ctx.author.voice.channel.id, 'betrayal')
 ```
 
-- Custom application ID
+- **Fishing**
 ```py
-pass
+link = togetherControls.create_link(ctx.author.voice.channel.id, 'fishing')
 ```
 
 # 📷 Image 
@@ -82,10 +86,6 @@ pass
 
 <br/>
 
-# 🌌 Example of bots made with Discord Together
-- [Discord Together Bot](https://github.com/RemyK888/discord-together-bot) by [RemyK](https://github.com/RemyK888)
-- [Lambdapse](https://github.com/lambdagit101/lambdapse) by [Lambdaguy101](https://github.com/lambdagit101)
-
 # 🚀 Others
 
 **This package is under MIT license.**
@@ -93,12 +93,15 @@ pass
 *Note: This package is not affiliated with Discord or YouTube.*
 
 If you have any problems, you can contact: `Bxllistic#4444`.
-**Discord server:** [Server Link](https://discord.gg/GK8jFXkybz)
+(*Discord server will be made if needed.*)
 
-[**Github repository**](https://github.com/RemyK888/discord-together)
+This project was converted to support `discord.py` from the npm package [discord-together](https://www.npmjs.com/package/discord-together) made by [RemyK888](https://github.com/RemyK888)
+
+
+[**Github repository**](https://github.com/apurv-r/discordTogether)
 
 <hr>
 
 ## **Made with ❤ by Bxllistic#4444**
-Modified from the discord.js module `discord-together` by Remy
+#### Credits to RemyK888 for application IDs
 

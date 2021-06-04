@@ -1,1 +1,1 @@
-from discordTogether.discordTogetherMain import DiscordTogether
+from .discordTogetherMain import DiscordTogether
