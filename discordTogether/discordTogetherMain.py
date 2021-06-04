@@ -75,7 +75,7 @@ class DiscordTogether():
                                 }
                             )
             result = r.json()
-            if result["errors"] or ("code" not in result.keys()):
+            if ("errors" in result.keys()) or ("code" not in result.keys()):
                 raise ConnectionError("An error occured while retrieving data from Discord API.")
             else:
                 return f"https://discord.com/invite/{result['code']}"
