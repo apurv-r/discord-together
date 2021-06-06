@@ -28,7 +28,7 @@ class DiscordTogether():
         Generates a invite link to a VC with the Discord Party VC Feature.
     """
 
-    async def __init__(self, client : Union[Client, Bot]):
+    def __init__(self, client : Union[Client, Bot]):
         """
         Constructs necessary discord.Client/discord.bot attribute.
 
