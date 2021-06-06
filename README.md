@@ -32,6 +32,7 @@ pip install discord-together
 This is a simple example of code using this package.
 
 ```py
+import discord
 from discord.ext import commands
 from discordTogether import DiscordTogether
 
@@ -91,7 +92,7 @@ link = togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 
 # 🚀 Others
 
-**This package is under MIT license.**
+**This package is under MIT license.** PR's and forks are more than welcome.
 
 *Note: This package is not affiliated with Discord or YouTube.*
 
@@ -106,5 +107,5 @@ This project was converted to support `discord.py` from the npm package [discord
 <hr>
 
 ## **Made with ❤ by Bxllistic#4444**
-#### Credits to RemyK888 for application IDs and foundations
-
+##### Credits to [@RemyK888](https://github.com/RemyK888) for application IDs and foundations
+##### Thanks to [@VineyS](https://github.com/VineyS) for shifting from `requests` to `aiohttp`
