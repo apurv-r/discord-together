@@ -16,7 +16,7 @@
 pip install discord-together
 ```
 
-#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [requests](https://pypi.org/project/requests/)
+#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [aiohttp](https://pypi.org/project/aiohttp/)
 <br/>
 
 # 🔑 Features
