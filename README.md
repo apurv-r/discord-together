@@ -16,7 +16,7 @@
 pip install discord-together
 ```
 
-#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [requests](https://pypi.org/project/requests/)
+#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [aiohttp](https://pypi.org/project/aiohttp/)
 <br/>
 
 # 🔑 Features
@@ -32,6 +32,7 @@ pip install discord-together
 This is a simple example of code using this package.
 
 ```py
+import discord
 from discord.ext import commands
 from discordTogether import DiscordTogether
 
@@ -44,7 +45,7 @@ async def on_ready():
 
 @client.command()
 async def startYT(ctx):
-    link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+    link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
     await ctx.send(f"Click the blue link!\n{link}")
 
 client.run("BOT_TOKEN_HERE")
@@ -54,17 +55,17 @@ client.run("BOT_TOKEN_HERE")
 # 🔧 Options
 - **Youtube**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
 ```
 
 - **Poker**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
 ```
 
 - **Chess**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
 ```
 
 - **Betrayal**
@@ -91,7 +92,7 @@ link = togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 
 # 🚀 Others
 
-**This package is under MIT license.**
+**This package is under MIT license.** PR's and forks are more than welcome.
 
 *Note: This package is not affiliated with Discord or YouTube.*
 
@@ -106,5 +107,5 @@ This project was converted to support `discord.py` from the npm package [discord
 <hr>
 
 ## **Made with ❤ by Bxllistic#4444**
-#### Credits to RemyK888 for application IDs and foundations
-
+##### Credits to [@RemyK888](https://github.com/RemyK888) for application IDs and foundations
+##### Thanks to [@VineyS](https://github.com/VineyS) for shifting from `requests` to `aiohttp`
