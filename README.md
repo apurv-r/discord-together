@@ -44,7 +44,7 @@ async def on_ready():
 
 @client.command()
 async def startYT(ctx):
-    link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+    link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
     await ctx.send(f"Click the blue link!\n{link}")
 
 client.run("BOT_TOKEN_HERE")
@@ -54,17 +54,17 @@ client.run("BOT_TOKEN_HERE")
 # 🔧 Options
 - **Youtube**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
 ```
 
 - **Poker**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
 ```
 
 - **Chess**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
 ```
 
 - **Betrayal**
