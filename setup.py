@@ -20,7 +20,7 @@ setup(name='discord-together',
       long_description_content_type="text/markdown",
       include_package_data=True,
       install_requires=[
-        "requests",
+        "aiohttp>=3.6.0,<3.8.0",
         "discord.py>=1.5",
       ],
       keywords = ['discordpy','discord.py','discord together','activity together','discord party games','party games','discord activities','discord','youtube together'],
