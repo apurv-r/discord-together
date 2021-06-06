@@ -1,4 +1,4 @@
-import requests
+import aiohttp
 from discord import Client, InvalidArgument
 from discord.ext.commands import Bot
 from typing import Union
@@ -28,7 +28,7 @@ class DiscordTogether():
         Generates a invite link to a VC with the Discord Party VC Feature.
     """
 
-    def __init__(self, client : Union[Client, Bot]):
+    async def __init__(self, client : Union[Client, Bot]):
         """
         Constructs necessary discord.Client/discord.bot attribute.
 
@@ -47,7 +47,7 @@ class DiscordTogether():
         else:
             raise ValueError("Valid bot token parameter is needed.")
     
-    def create_link(self, voiceChannelID, option):
+    async def create_link(self, voiceChannelID, option):
         '''
         Generates a invite link to a VC with the Discord Party VC Feature.
 
@@ -60,7 +60,8 @@ class DiscordTogether():
         '''
         
         if option and (option.lower().replace(" ","") in defaultApplications.keys()):
-            r = requests.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
+            async with aiohttp.ClientSession() as session:
+                async with session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
                                 json={
                                     'max_age': 86400,
                                     'max_uses': 0,
@@ -73,8 +74,8 @@ class DiscordTogether():
                                     'Authorization': f'Bot {self.client.http.token}',
                                     'Content-Type': 'application/json'
                                 }
-                            )
-            result = r.json()
+                            ) as resp:
+                    result = await resp.json()
             if ("errors" in result.keys()) or ("code" not in result.keys()):
                 raise ConnectionError("An error occured while retrieving data from Discord API.")
             else:
