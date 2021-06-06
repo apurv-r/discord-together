@@ -32,10 +32,10 @@ pip install discord-together
 This is a simple example of code using this package.
 
 ```py
-import discord
+from discord.ext import commands
 from discordTogether import DiscordTogether
 
-client = discord.Client(prefix="~")
+client = commands.Bot(command_prefix="~")
 togetherControl = DiscordTogether(client)
 
 @client.event
