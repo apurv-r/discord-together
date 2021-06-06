@@ -1,18 +1,19 @@
-<center>
 <h1><strong>Discord Together</strong></h1>
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/discordTogether?style=for-the-badge)
-![Made for discord.py](https://img.shields.io/badge/Made%20for-discord.py-blue?style=for-the-badge&logo=appveyor)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/discord-together?style=flat&logo=acclaim)
+![Made for discord.py](https://img.shields.io/badge/Made%20for-discord.py-blue?style=flat&logo=discord)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
-</center>
 
+# 👋 Welcome!
+### Discord has released a BETA feature that they call Discord Party Games to only a certain hand-picked servers. This module allows you to temporarily enable such features for your servers! 
 
+<br/>
 
 # 🔩 Installation
-## Install [discordTogether](https://pypi.org/project/discordTogether/)
+## Install [discord-together](https://pypi.org/project/discord-together/)
 ```
-pip install discordTogether
+pip install discord-together
 ```
 
 #### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [requests](https://pypi.org/project/requests/)
@@ -35,7 +36,7 @@ import discord
 from discordTogether import DiscordTogether
 
 client = discord.Client(prefix="~")
-togetherControls = DiscordTogether(client)
+togetherControl = DiscordTogether(client)
 
 @client.event
 async def on_ready():
@@ -43,46 +44,48 @@ async def on_ready():
 
 @client.command()
 async def startYT(ctx):
-    link = togetherControls.create_link(ctx.author.voice.channel.id, 'youtube')
+    link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
     await ctx.send(f"Click the blue link!\n{link}")
+
+client.run("BOT_TOKEN_HERE")
 ```
 <br/>
 
 # 🔧 Options
 - **Youtube**
 ```py
-link = togetherControls.create_link(ctx.author.voice.channel.id, 'youtube')
+link = togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
 ```
 
 - **Poker**
 ```py
-link = togetherControls.create_link(ctx.author.voice.channel.id, 'poker')
+link = togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
 ```
 
 - **Chess**
 ```py
-link = togetherControls.create_link(ctx.author.voice.channel.id, 'chess')
+link = togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
 ```
 
 - **Betrayal**
 ```py
-link = togetherControls.create_link(ctx.author.voice.channel.id, 'betrayal')
+link = togetherControl.create_link(ctx.author.voice.channel.id, 'betrayal')
 ```
 
 - **Fishing**
 ```py
-link = togetherControls.create_link(ctx.author.voice.channel.id, 'fishing')
+link = togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 ```
 
 # 📷 Image 
 
-![Invite link](https://media.discordapp.net/attachments/835896457454026802/837968506846183474/2021-05-01_10h26_17.png)
+![Invite link](https://cdn.discordapp.com/attachments/450659049659170817/850783760009658389/Screenshot_2021-06-04_231039_3.png)
 
-### *Note: you have to click on the BLUE LINK, not the 'Play' button, in order to start the activity !*
+### *Note: you have to click on the **BLUE LINK**, <u>not the 'Play' button</u>, in order to start the activity !*
 
 <br/>
 
-![YouTube Together](https://media.discordapp.net/attachments/835896457454026802/837968510843093033/2021-05-01_10h27_31.png?width=1229&height=676)
+![YouTube Together](https://cdn.discordapp.com/attachments/450659049659170817/850782952724234290/Screenshot_2021-06-04_231612.png)
 
 <br/>
 
@@ -98,10 +101,10 @@ If you have any problems, you can contact: `Bxllistic#4444`.
 This project was converted to support `discord.py` from the npm package [discord-together](https://www.npmjs.com/package/discord-together) made by [RemyK888](https://github.com/RemyK888)
 
 
-[**Github repository**](https://github.com/apurv-r/discordTogether)
+[**Github repository**](https://github.com/apurv-r/discord-together)
 
 <hr>
 
 ## **Made with ❤ by Bxllistic#4444**
-#### Credits to RemyK888 for application IDs
+#### Credits to RemyK888 for application IDs and foundations
 

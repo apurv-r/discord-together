@@ -41,7 +41,7 @@ class DiscordTogether():
 
         if client:
             try:
-                self.token = client.http.token
+                self.client = client
             except:
                 raise AttributeError("The client variable inputted has no \"token\" attribute.")
         else:
@@ -70,7 +70,7 @@ class DiscordTogether():
                                     'validate': None
                                 }, 
                                 headers = {
-                                    'Authorization': f'Bot {self.token}',
+                                    'Authorization': f'Bot {self.client.http.token}',
                                     'Content-Type': 'application/json'
                                 }
                             )
