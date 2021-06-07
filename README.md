@@ -32,7 +32,6 @@ pip install discord-together
 This is a simple example of code using this package.
 
 ```py
-import discord
 from discord.ext import commands
 from discordTogether import DiscordTogether
 
@@ -78,11 +77,18 @@ link = await togetherControl.create_link(ctx.author.voice.channel.id, 'betrayal'
 link = await togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 ```
 
+- **Custom Activity**
+```py
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'CUSTOM_APP_ID_HERE')
+# Only use this if you know the exact ID for a application.
+```
+
+
 # 📷 Image 
 
 ![Invite link](https://cdn.discordapp.com/attachments/450659049659170817/850783760009658389/Screenshot_2021-06-04_231039_3.png)
 
-### *Note: you have to click on the **BLUE LINK**, <u>not the 'Play' button</u>, in order to start the activity !*
+### *Note: you have to click on the **BLUE LINK**, not the 'Play' button, in order to start the activity !*
 
 <br/>
 
@@ -92,7 +98,7 @@ link = await togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 
 # 🚀 Others
 
-**This package is under MIT license.** PR's and forks are more than welcome.
+**This package is under MIT license.** Tested PR's and forks are more than welcome.
 
 *Note: This package is not affiliated with Discord or YouTube.*
 
