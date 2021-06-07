@@ -70,12 +70,12 @@ link = await togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
 
 - **Betrayal**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'betrayal')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'betrayal')
 ```
 
 - **Fishing**
 ```py
-link = togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
+link = await togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
 ```
 
 # 📷 Image 
