@@ -62,11 +62,6 @@ client = discord.Client()
 togetherControl = DiscordTogether(client)
 
 @client.event
-async def startYT(ctx):
-    link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
-    await ctx.send(f"Click the blue link!\n{link}")
-
-@client.event
 async def on_message(message):
     if message.content.startswith("!discordtogether"): 
         link = await togetherControl.create_link(message.author.voice.channel.id, 'youtube')
