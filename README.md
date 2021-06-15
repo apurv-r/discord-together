@@ -28,7 +28,7 @@ pip install discord-together
 
 <br/>
 
-# 💻 Code example
+# 💻 Commands - Code example
 This is a simple example of code using this package.
 
 ```py
@@ -46,6 +46,31 @@ async def on_ready():
 async def startYT(ctx):
     link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
     await ctx.send(f"Click the blue link!\n{link}")
+
+client.run("BOT_TOKEN_HERE")
+```
+<br/>
+
+# 💻 on_message - Code example
+This is a simple example of code using this package.
+
+```py
+import discord
+from discordTogether import DiscordTogether
+
+client = discord.Client()
+togetherControl = DiscordTogether(client)
+
+@client.event
+async def startYT(ctx):
+    link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+    await ctx.send(f"Click the blue link!\n{link}")
+
+@client.event
+async def on_message(message):
+    if message.content.startswith("!discordtogether"): 
+        link = await togetherControl.create_link(message.author.voice.channel.id, 'youtube')
+        await message.channel.send(f"Click the blue link!\n{link}")
 
 client.run("BOT_TOKEN_HERE")
 ```
