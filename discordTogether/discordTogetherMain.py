@@ -101,5 +101,4 @@ class DiscordTogether:
             else:
                 return f"https://discord.com/invite/{result['code']}"
         else:
-            raise InvalidArgument(
-                "Invalid activity option chosen. You may only choose between (\"youtube\",\"poker\",\"chess\",\"fishing\",\"betrayal\") or input a custom application ID as a string.")
+            raise InvalidArgument("Invalid activity option chosen. You may only choose between (\"youtube\",\"poker\",\"chess\",\"fishing\",\"betrayal\") or input a custom application ID as a string.")
