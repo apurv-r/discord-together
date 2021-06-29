@@ -1,6 +1,6 @@
 import aiohttp
-from discord import Client, InvalidArgument
-from discord.ext.commands import Bot
+from discord import Client, InvalidArgument, AutoShardedClient
+from discord.ext.commands import Bot, AutoShardedBot
 from typing import Union
 
 defaultApplications = {                  # Credits to RemyK888
@@ -25,7 +25,7 @@ class DiscordTogether():
         Generates a invite link to a VC with the Discord Party VC Feature.
     """
 
-    def __init__(self, client : Union[Client, Bot]):
+    def __init__(self, client : Union[Client, Bot, AutoShardedClient, AutoShardedBot]):
         """
         Constructs necessary discord.Client/discord.bot attribute.
         Parameters
