@@ -1,4 +1,6 @@
 <h1><strong>Discord Together</strong></h1>
+<H3><strong>THIS ONLY WORKS FOR WEB AND UPDATED PC APP VERSIONS OF DISCORD AND IS NOT SUPPORTED ON MOBILE VERSIONS OF DISCORD FOR THE TIME BEING</strong></H3>
+
 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/discord-together?style=flat&logo=acclaim)
 ![Made for discord.py](https://img.shields.io/badge/Made%20for-discord.py-blue?style=flat&logo=discord)
