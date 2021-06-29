@@ -1,6 +1,6 @@
 import aiohttp
-from discord import Client, InvalidArgument
-from discord.ext.commands import Bot
+from discord import Client, InvalidArgument, utils, AutoShardedClient
+from discord.ext.commands import Bot, AutoShardedBot
 from typing import Union
 
 defaultApplications = {                  # Credits to RemyK888
@@ -11,27 +11,27 @@ defaultApplications = {                  # Credits to RemyK888
     'chess':'832012586023256104'
 }
 
-class DiscordTogether():
+class DiscordTogether:
     """
     Controls invite generations.
     ...
     Attributes
     ----------
-    client/bot : discord.Client/discord.Bot
-        The client/bot variable used for your bot project.
+    client/bot : discord.Client/commands.Bot/discord.AutoShardedClient/commands.AutoShardedBot
+          The client/bot variable used for your bot project.
     Methods
     -------
-    create_link(voiceChannelID, option):
+    create_link(option, voiceChannelID, voiceChannelName, guildID):
         Generates a invite link to a VC with the Discord Party VC Feature.
     """
 
-    def __init__(self, client : Union[Client, Bot]):
+    def __init__(self, client : Union[Client, Bot, AutoShardedClient, AutoShardedBot]):
         """
         Constructs necessary discord.Client/discord.bot attribute.
         Parameters
         ----------
-            client/bot : discord.Client/discord.Bot
-                The client/bot variable used for your bot project.
+            client/bot : discord.Client/commands.Bot/discord.AutoShardedClient/commands.AutoShardedBot
+          The client/bot variable used for your bot project.
         """
 
         if client:
@@ -42,15 +42,30 @@ class DiscordTogether():
         else:
             raise ValueError("Valid bot token parameter is needed.")
     
-    async def create_link(self, voiceChannelID, option):
+    async def create_link(self, option, voiceChannelID: int = None, voiceChannelName: str = None, guildID: int = None):
         '''
         Generates a invite link to a VC with the Discord Party VC Feature.
         Parameters:
-                voiceChannelID (int): ID of the voice channel to create the activity for
                 option (str): A option amongst the predefined choices ("youtube","poker","betrayal","fishing","chess")
+                voiceChannelID (int) (Defaults to None): ID of the voice channel to create the activity for
+                voiceChannelName (str) (Defaults to None): The name of the Voice Channel. If this is provided, the Guild ID should also be provided
+                guildID (int) (Defaults to None): The ID of the guild in which the command is being executed. Required if voiceChannelName is provided
         Returns:
                 invite_link (str): A discord invite link which, upon clicked, starts the custom activity in the VC.
         '''
+        if guildID is None and voiceChannelName is not None:
+            raise ValueError("Please provide a valid Guild ID because the Voice Channel Name is provided")
+        if guildID is not None and voiceChannelName is None:
+            continue
+        if guildID is not None and voiceChannelName is not None and voiceChannelID is None:
+            guild = self.client.get_guild(guildID)
+            vcObject = utils.get(guild.voice_channels, name=voiceChannelName)
+            if vcObject is None:
+                raise ValueError("Please make sure the Voice Channel name and Guild ID is/are correct")
+            if vcObject is not None:
+                voiceChannelID = vcObject.id
+        if voiceChannelID is not None and voiceChannelName is None and guildID is None:
+            continue
         # Pre Defined Application ID
         if option and (str(option).lower().replace(" ","") in defaultApplications.keys()):
             async with aiohttp.ClientSession() as session:         # Credits to VineyS for updating code with aiohttp
