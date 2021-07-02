@@ -125,7 +125,7 @@ Multiple people clicking the blue link at once can cause a "Activity Ended" erro
 
 **This package is under MIT license.** Appropriately tested PR's are more than welcome.
 
-*Note: This package is not affiliated with Discord pr YouTube.*
+*Note: This package is not affiliated with Discord or YouTube.*
 
 If you have any problems or enquiries, you can contact: `Bxllistic#4444` or join the [discord-together Support Server](https://discord.gg/2fbyXn2hJV).
 
