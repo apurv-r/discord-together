@@ -1,14 +1,23 @@
-<h1><strong>Discord Together</strong></h1>
-
-![PyPI - Downloads](https://img.shields.io/pypi/dm/discord-together?style=flat&logo=acclaim)
-![Made for discord.py](https://img.shields.io/badge/Made%20for-discord.py-blue?style=flat&logo=discord)
-
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+<div align="center">
+    <a href="https://pypi.org/project/discord-together"><img src="https://i.ibb.co/8xPZZFV/DT-Logo.png" alt="discord-together logo" height="128" style="border-radius: 50%"></a>
+    <div>
+        <h1><strong>Discord Together</strong></h1>
+    </div>
+    <div>
+        <a href="https://pypi.org/project/discord-together"><img src="https://img.shields.io/pypi/dm/discord-together?color=%23EF0BB9&?style=flat" alt="discord-together downloads"></a>
+        <a href="https://pypi.org/project/discord-together"><img src="https://img.shields.io/pypi/v/discord-together?color=%23EF0BB9&label=version&?style=flat" alt="discord-together version"></a>
+        <a href="https://pypi.org/project/discord-together"><img src="https://img.shields.io/badge/made%20for-discord.py-23EF0BB9?color=%23EF0BB9&?style=flat" alt="discord-together version"></a>
+    </div>
+</div>
+<br>
+<br>
 
 # 👋 Welcome!
-### Discord has released a BETA feature that they call Discord Party Games to only a certain hand-picked servers. This module allows you to temporarily enable such features for your servers! 
+<h3>Discord has released a BETA feature that they call Discord Party Games to only a certain hand-picked servers. This module allows you to temporarily enable such features for your servers!</h3>
+<br>
+<h4>As of  v1.0.8, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
 
-<br/>
+<br>
 
 # 🔩 Installation
 ## Install [discord-together](https://pypi.org/project/discord-together/)
@@ -16,17 +25,17 @@
 pip install discord-together
 ```
 
-#### Package dependencies include [discord.py](https://pypi.org/project/discord.py/) and [aiohttp](https://pypi.org/project/aiohttp/)
-<br/>
+#### Package dependencies only include [discord.py](https://pypi.org/project/discord.py/)
+<br>
 
 # 🔑 Features
-- Easy to use
-- Dynamic
+- Easy to use and lightweight
 - Actively maintained
 - [discord.py](https://pypi.org/project/discord.py/) support
-- Lightweight
+- Dynamic error handling with custom errors
+- Debug mode for invalid invites
 
-<br/>
+<br>
 
 # 💻 Code example
 This is a simple example of code using this package.
@@ -49,69 +58,81 @@ async def startYT(ctx):
 
 client.run("BOT_TOKEN_HERE")
 ```
-<br/>
-
-# 🔧 Options
-- **Youtube**
+Within cogs :
 ```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+from discord.ext import commands
+from discordTogether import DiscordTogether
+
+class YoutubeTogetherCog(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+        self.togetherControl = DiscordTogether(client)
+    
+    @commands.command()
+    async def start(self, ctx):
+        link = await self.togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+        await ctx.send(f"Click the blue link!\n{link}")
+
+def setup(client):
+    client.add_cog(YoutubeTogetherCog(client))
+```
+<br>
+
+# 🔧 General Usage
+### **create_link() Format**
+```py
+link = await togetherControl.create_link(VC_ID, 'APP_ID')
+# VC_ID : Integer
+# APP_ID : String
 ```
 
-- **Poker**
-```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'poker')
-```
+- **Options for APP_ID:**
+<br>- &nbsp;Youtube
+<br>- &nbsp;Poker
+<br>- &nbsp;Chess
+<br>- &nbsp;Betrayal
+<br>- &nbsp;Fishing
+<br>- &nbsp;`Custom Activity ID` (Only use this if you know the exact ID for an activity)
 
-- **Chess**
-```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'chess')
-```
+<br>
 
-- **Betrayal**
-```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'betrayal')
-```
+### **Error Handling**
+- ```discordTogether.errors.InvalidChannelID```:&nbsp; Raised when an invalid Voice Channel ID is enterred.
+- ```discordTogether.errors.InvalidActivityChoice``` :&nbsp; Raised when an invalid activity choice is entered.
+- ```discord.ext.commands.errors.BotMissingPermissions``` :&nbsp; Raised when the bot does not have *CREATE_INVITE* permission.
+- ```discord.errors.ConnectionError``` :&nbsp; Raised when a connection error from Discord API occurs.
+- ```discord.errors.InvalidArgument``` :&nbsp; Raised when a custom activity ID is invalid.
 
-- **Fishing**
-```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'fishing')
-```
-
-- **Custom Activity**
-```py
-link = await togetherControl.create_link(ctx.author.voice.channel.id, 'CUSTOM_APP_ID_HERE')
-# Only use this if you know the exact ID for a application.
-```
-
+<br>
 
 # 📷 Image 
 
-![Invite link](https://cdn.discordapp.com/attachments/450659049659170817/850783760009658389/Screenshot_2021-06-04_231039_3.png)
+![Invite link](https://cdn.discordapp.com/attachments/678298437854298122/860210951222460446/msedge_Gntg4yflYw.png)
 
-### *Note: you have to click on the **BLUE LINK**, not the 'Play' button, in order to start the activity !*
+<h3>⚠️ Advisory Note:</h3>
+<h4>
+Atleast one person needs to click on the <strong>BLUE LINK</strong>, not the 'Play' button, in order to start the activity! Once the activity is started, people can join by clicking 'Play'.
 
-<br/>
+Multiple people clicking the blue link at once can cause a "Activity Ended" error screen, however it's not a common occurence.</h4> 
 
-![YouTube Together](https://cdn.discordapp.com/attachments/450659049659170817/850782952724234290/Screenshot_2021-06-04_231612.png)
+<br>
 
-<br/>
+![YouTube Together](https://cdn.discordapp.com/attachments/678298437854298122/860210751448547328/msedge_HpqALcJCcD.png)
+
+<br>
 
 # 🚀 Others
 
-**This package is under MIT license.** Tested PR's and forks are more than welcome.
+**This package is under MIT license.** Appropriately tested PR's are more than welcome.
 
-*Note: This package is not affiliated with Discord or YouTube.*
+*Note: This package is not affiliated with Discord pr YouTube.*
 
-If you have any problems, you can contact: `Bxllistic#4444`.
-(*Discord server will be made if needed.*)
+If you have any problems or enquiries, you can contact: `Bxllistic#4444` or join the [discord-together Support Server](https://discord.gg/2fbyXn2hJV).
 
-This project was converted to support `discord.py` from the npm package [discord-together](https://www.npmjs.com/package/discord-together) made by [RemyK888](https://github.com/RemyK888)
+This project was converted to support discord.py from the npm package [discord-together](https://www.npmjs.com/package/discord-together) made by [RemyK888](https://github.com/RemyK888)
 
-
-[**Github repository**](https://github.com/apurv-r/discord-together)
-
+<br>
 <hr>
 
 ## **Made with ❤ by Bxllistic#4444**
-##### Credits to [@RemyK888](https://github.com/RemyK888) for application IDs and foundations
-##### Thanks to [@VineyS](https://github.com/VineyS) for shifting from `requests` to `aiohttp`
+Credits to [@RemyK888](https://github.com/RemyK888) for application IDs and foundations
