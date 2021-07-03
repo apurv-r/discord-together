@@ -37,22 +37,22 @@ class DiscordTogether:
         - create_link(voiceChannelID : int, option : str) : Creates a invite link
         """
 
-        if isinstance(client, Client) or isinstance(client, AutoShardedClient):
+        if isinstance(client, (Client, AutoShardedClient, Bot, AutoShardedBot)):
             self.client = client
         else:
             raise ValueError("The client/bot object parameter is not valid.")
         
-        debug = kwargs.get("debug",False)
-        if isinstance(debug,bool):
+        debug = kwargs.get("debug", False)
+        if isinstance(debug, bool):
             self.debug = debug
         else:
             self.debug = False
-            print('\033[93m'+"[WARN] (discord-together) Debug parameter did not recieve a bool object. Reverting to Debug = False."+'\033[0m') 
+            print('\033[93m'+"[WARN] (discord-together) Debug parameter did not receive a bool object. Reverting to Debug = False."+'\033[0m') 
 
 
     async def create_link(self, voiceChannelID: int, option: str) -> str:
         """
-        Generates a invite link to a VC with the Discord Party VC Feature.
+        Generates an invite link to a VC with the Discord Party VC Feature.
         ----------
         Parameters:
             - voiceChannelID (int): ID of the voice channel to create the activity for
@@ -61,6 +61,12 @@ class DiscordTogether:
         Returns:
             - invite_link (str): A discord invite link which, upon clicked, starts the custom activity in the VC.
         """
+        
+        # Type checks
+        if not isinstance(voiceChannelID, (str,int)):
+            raise TypeError(f"'voiceChannelID' parameter MUST be of type string or integer, not a \"{type(voiceChannelID).__name__}\" type.")
+        if not isinstance(option, (str,int)):
+            raise TypeError(f"'option' parameter MUST be of type string or integer, not a \"{type(option).__name__}\" type.")
 
         # Pre Defined Application ID
         if option and (str(option).lower().replace(" ", "") in defaultApplications.keys()):   
@@ -68,7 +74,7 @@ class DiscordTogether:
             data = {
                 'max_age': 86400,
                 'max_uses': 0,
-                'target_application_id': defaultApplications[option],
+                'target_application_id': defaultApplications[str(option).lower().replace(" ","")],
                 'target_type': 2,
                 'temporary': False,
                 'validate': None
@@ -97,12 +103,12 @@ class DiscordTogether:
 
 
         # User Defined Application ID
-        elif option and (str(option).lower().replace("", " ") not in defaultApplications.keys()) and option.isnumeric():
+        elif option and (str(option).replace(" ", "") not in defaultApplications.keys()) and str(option).replace(" ","").isnumeric():
             
             data = {
                 'max_age': 86400,
                 'max_uses': 0,
-                'target_application_id': str(option),
+                'target_application_id': str(option).replace(" ", ""),
                 'target_type': 2,
                 'temporary': False,
                 'validate': None
@@ -117,7 +123,8 @@ class DiscordTogether:
                 if "10003" in str(e):
                     raise InvalidChannelID("Voice Channel ID is invalid.")
                 elif "target_application_id" in str(e):
-                    raise InvalidArgument(f"\"{str(option)}\" is an invalid custom application ID.")
+                    option = str(option).replace(" ", "")
+                    raise InvalidArgument(f"\"{option}\" is an invalid custom application ID.")
                 elif "50013" in str(e):
                     raise BotMissingPermissions(["CREATE_LINK"])  
                 elif "130000" in str(e):
