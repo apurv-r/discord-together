@@ -7,7 +7,7 @@ An unofficial module that allows the use of the Discord's BETA feature, Party Ga
 
 __name__ = "discord-together"
 __author__ = "apurv-r"
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 __license__ = "MIT"
 
 from .discordTogetherMain import DiscordTogether
