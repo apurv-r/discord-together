@@ -6,12 +6,17 @@ from typing import Union, Optional
 from .errors import InvalidChannelID, InvalidActivityChoice, InvalidCustomID, RangeExceeded
 
 
-defaultApplications = {  # Credits to RemyK888
+defaultApplications = { 
+    # Credits to RemyK888
     'youtube': '755600276941176913',
     'poker': '755827207812677713',
     'betrayal': '773336526917861400',
     'fishing': '814288819477020702',
-    'chess': '832012774040141894'
+    'chess': '832012774040141894',
+    # Credits to awesomehet2124
+    'letter-tile': '879863686565621790',
+    'word-snack': '879863976006127627',
+    'doodle-crew': '878067389634314250'
 }
 
 class ActivityLink:
@@ -27,7 +32,7 @@ class ActivityLink:
     def __init__(self, inviteCode : str):
         self.raw_code = inviteCode
         self.short_link = f"discord.gg/{inviteCode}"
-    def __repr__(self):
+    def __str__(self):
         return f"https://discord.gg/{self.raw_code}"
 
 class DiscordTogether:
@@ -43,8 +48,15 @@ class DiscordTogether:
     
     Methods
     -------
-    create_link(voiceChannelID : int, option : str) :
+    create_link(voiceChannelID : int, option : str)
+
+    Attributes
+    -------
+    default_choices
+        Gives all the default application choices that you have
     """
+
+    default_choices = list(defaultApplications.keys())
 
     def __init__(self, client: Union[Client, Bot, AutoShardedClient, AutoShardedBot], *, debug: Optional[bool] = False):
         """
@@ -85,7 +97,7 @@ class DiscordTogether:
         voiceChannelID: Union[:class:`str`, :class:`int`]
             ID of the voice channel to create the activity for
         option: Union[:class:`str`, :class:`int`]
-            A option amongst the predefined choices ("youtube","poker","betrayal","fishing","chess") or a custom ID
+            A option amongst the predefined choices (DiscordTogether.default_choices) or a custom ID
         max_age: Optional[:class:`int`]
             Optional duration in seconds after which the invite expires. 
             Value has to be between 0 (Unlimited) and 604800 (7 days), default is 86400 (24 hrs).
@@ -101,9 +113,9 @@ class DiscordTogether:
         
         # Type checks
         if not isinstance(voiceChannelID, (str,int)):
-            raise TypeError(f"'voiceChannelID' argument MUST be of type string or integer, not a \"{type(voiceChannelID).__name__}\" type.")
+            raise TypeError(f"'voiceChannelID' argument MUST be of type string or integer, not a {type(voiceChannelID).__name__!r} type.")
         if not isinstance(option, (str,int)):
-            raise TypeError(f"'option' argument MUST be of type string or integer, not a \"{type(option).__name__}\" type.")
+            raise TypeError(f"'option' argument MUST be of type string or integer, not a {type(option).__name__!r} type.")
         
         # Max Range checks
         if not 0 <= max_age <= 604800:
