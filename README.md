@@ -19,7 +19,7 @@
 
 ### Use the [docs for discord-together](https://docs.discord-together.ml/) for detailed usage guide.
 <br>
-<h4>As of  v1.1.1, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
+<h4>As of  v1.1.2, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
 <br>
 
 # 🔩 Installation
@@ -66,13 +66,8 @@ View the **[docs](https://docs.discord-together.ml/)** for more detailed/advance
 ![Invite link](https://cdn.discordapp.com/attachments/678298437854298122/860210951222460446/msedge_Gntg4yflYw.png)
 
 <h3>⚠️ Advisory Note:</h3>
-<h4>
 At least one person needs to click on the <strong>BLUE LINK</strong>, not the 'Play' button, in order to start the activity! Once the activity is started, people can join by clicking 'Play'.
-</h4> 
 <br>
-<h4> 
-Multiple people clicking the blue link at once can cause a "Activity Ended" error screen, however it's not a common occurence.</h4> 
-
 <br>
 
 ![YouTube Together](https://cdn.discordapp.com/attachments/678298437854298122/860210751448547328/msedge_HpqALcJCcD.png)
