@@ -6,21 +6,22 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 
 setup(name='discord-together',
-      packages = ['discordTogether'],
+      packages = ['discord_together'],
       author='Apurv R',
       url='https://github.com/apurv-r/discord-together',
       project_urls={
         "Issue tracker": "https://github.com/apurv-r/discord-together/issues",
+        "Docs": "https://docs.discord-together.ml/",
       },
-      download_url="https://github.com/apurv-r/discord-together/archive/refs/tags/1.1.2.tar.gz",
-      version='1.1.2',
+      download_url="https://github.com/apurv-r/discord-together/archive/refs/tags/1.2.0.tar.gz",
+      version='1.2.0',
       license='MIT',
       description='Utilize the BETA Discord VC Party Games feature!',
       long_description=readme,
       long_description_content_type="text/markdown",
       include_package_data=True,
       install_requires=[
-        "discord.py>=1.5",
+        "aiohttp>=3.7.2",
       ],
       keywords = ['discord.py','discord together','youtube together','voice activities','discord activities','discord games'],
       python_requires='>=3.6.0',
