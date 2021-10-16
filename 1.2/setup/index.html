@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#setup" class="md-skip">
+        <a href="#steps-to-setup" class="md-skip">
           Skip to content
         </a>
       
@@ -256,6 +256,22 @@
   
   
     <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        FAQ
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../changelog/logs/" class="md-tabs__link">
         Changelog
       </a>
@@ -378,8 +394,6 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Setup
@@ -395,14 +409,19 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-setup" class="md-nav__link">
+    Steps to setup
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#within-your-botpy-file-using-dpy-172" class="md-nav__link">
@@ -540,12 +559,60 @@
       
       
         <label class="md-nav__link" for="__nav_4">
+          FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        Frequently Asked Questions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
           Changelog
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Changelog" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Changelog
         </label>
@@ -601,14 +668,19 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-setup" class="md-nav__link">
+    Steps to setup
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#within-your-botpy-file-using-dpy-172" class="md-nav__link">
@@ -637,8 +709,30 @@
               
                 
                 
-                <h1 id="setup">Setup</h1>
-<h3 id="within-your-botpy-file-using-dpy-172">within your bot.py file (using dpy 1.7.2)</h3>
+                  <h1>Setup</h1>
+                
+                <h3 id="steps-to-setup">Steps to setup</h3>
+<p>Using discord-together is quite simple.</p>
+<ul>
+<li>First, import the DiscordTogether constructor
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">discord_together</span> <span class="kn">import</span> <span class="n">DiscordTogether</span>
+</code></pre></div></li>
+<li>Next, create a variable to store the class instance. This variable must be defined in a async function, like on_ready()
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">event</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">():</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="s2">&quot;BOT_TOKEN_HERE&quot;</span><span class="p">)</span>
+    <span class="c1"># This creates a bot variable. You can also use the global keyword here instead.</span>
+</code></pre></div></li>
+<li>Finally, you can use the <code>create_link</code> function
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">togetherControl</span><span class="o">.</span><span class="n">create_link</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">voice</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;youtube&#39;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Click the blue link!</span><span class="se">\n</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<p>Here are some examples to add further clarity:</p>
+<h3 id="within-your-botpy-file-using-dpy-172">within your bot.py file <small>(using dpy 1.7.2)</small></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -677,7 +771,7 @@
 </code></pre></div>
 </td></tr></table>
 <h3 id="within-any-cogs">within any cogs</h3>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -692,13 +786,23 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">discord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">discord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
 <span class="kn">from</span> <span class="nn">discord_together</span> <span class="kn">import</span> <span class="n">DiscordTogether</span>
 
 <span class="k">class</span> <span class="nc">YoutubeTogetherCog</span><span class="p">(</span><span class="n">commands</span><span class="o">.</span><span class="n">Cog</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="n">client</span><span class="p">)</span> <span class="c1"># 1</span>
+
+    <span class="nd">@commands</span><span class="o">.</span><span class="n">Cog</span><span class="o">.</span><span class="n">listener</span><span class="p">()</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="n">client</span><span class="p">)</span> 
+        <span class="c1"># Remember to only use this if you haven&#39;t already made a bot variable for `togetherControl` in your bot.py file.</span>
+        <span class="c1"># If you have already declared a bot variable for it, you can use `self.client.togetherControl` to access it&#39;s functions</span>
 
     <span class="nd">@commands</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
@@ -710,7 +814,12 @@
     <span class="n">client</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">YoutubeTogetherCog</span><span class="p">(</span><span class="n">client</span><span class="p">))</span>
 </code></pre></div>
 </td></tr></table>
-Remember to only use this if you haven't already made a bot variable for <code>togetherControl</code> in your bot.py file. If you have already declared a bot variable for it, you can use <code>self.client.togetherControl</code> to access it's functions</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If your discord.py fork supports it, you can even use <code>client.http.token</code> instead of inputting your actual token string into the DiscordTogether class constructor.
+<div class="highlight"><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+</code></pre></div></p>
+</div>
 <figure>
 <p><img alt="Invite Example" src="https://media.discordapp.net/attachments/678298437854298122/897822880396623882/assets2F-MfXMFAe3HfRR02VFC_W2F-MfYXzH1YYW63qW0Hl992F-MfYlVJWaEHV2sTBTi2u2F68747470733a2f2f63646e2e64.png?width=492&amp;height=268" width="500" />
   </p>
@@ -826,7 +935,7 @@ Remember to only use this if you haven't already made a bot variable for <code>t
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.8397ff9e.min.js", "version": {"provider": "mike", "default": "stable"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.8397ff9e.min.js", "version": {"provider": "mike", "default": "stable"}}</script>
     
     
       <script src="../assets/javascripts/bundle.f89c2efe.min.js"></script>

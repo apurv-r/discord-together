@@ -256,6 +256,22 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../faq/" class="md-tabs__link">
+        FAQ
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../changelog/logs/" class="md-tabs__link">
         Changelog
       </a>
@@ -543,12 +559,60 @@
       
       
         <label class="md-nav__link" for="__nav_4">
+          FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        Frequently Asked Questions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
           Changelog
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Changelog" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Changelog
         </label>
@@ -647,7 +711,7 @@
                 
                   <h1>create_link()</h1>
                 
-                <p>Communicates with Discord API and returns the invite link for the specific application requested.</p>
+                <p>Communicates with Discord API and returns the invite link for the specific application requested. Needs to be in an <em>async</em> function.</p>
 <h2 id="parameters">Parameters</h2>
 <table>
 <thead>
@@ -657,7 +721,7 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">ID of the voice channel that the invite link will point at.<br><br>Type: <code>str</code> or <code>int</code></td>
+<td align="left">ID of the voice channel that the invite link will point at.<br><br><strong>Type:</strong> <code>str</code> or <code>int</code></td>
 </tr>
 </tbody>
 </table>
@@ -669,7 +733,7 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">The VC activity/application that you want to create an invite for.<br><br>Type: <code>str</code> (for pre-defined applications) or <code>int</code> (for custom IDs)</td>
+<td align="left">The VC activity/application that you want to create an invite for.<br><br><strong>Type:</strong> <code>str</code> (for pre-defined applications) or <code>int</code> (for custom IDs)</td>
 </tr>
 <tr>
 <td align="left"><span style="font-size: 1.2em"><em>Pre-defined applications</em></span><br>These are the applications/activities that currently come with the discord-together package.<br>These currently include:<table style="width:40%"><tbody><tr><td>Watch Together</td><td><strong><code>youtube</code></strong></td></tr><tr><td>Poker Night</td><td><strong><code>poker</code></td></strong></tr><tr><td>Chess in the Park</td><td><strong><code>chess</code></strong></td></tr><tr><td>Betrayal.io</td><td><strong><code>betrayal</code></strong></td></tr><tr><td>Fishington.io</td><td><strong><code>fishing</code></strong></td></tr><tr><td>Letter Tile</td><td><strong><code>letter-tile</code></strong></td></tr><tr><td>Word Snack</td><td><strong><code>word-snack</code></strong></td></tr><tr><td>Doodle Crew</td><td><strong><code>doodle-crew</code></strong></td></tr></tbody></table>Use the text in the (brackets) as the application parameter<br><br><br><span style="font-size: 1.2em"><em>Custom application IDs</em></span><br>This is a advanced feature brought by the package which allows you to create links for applications that may not be included default. This option requires you to have the ID for the application. For example, YouTube Together uses the ID <code>880218394199220334</code>.<br>So, if you do have the ID, you can use this option in the format that will be coming up under Examples.</td>
@@ -679,24 +743,24 @@
 <table>
 <thead>
 <tr>
-<th align="left"><span style="font-size: 1.8em"><strong>max_age</strong></span></th>
+<th align="left"><span style="font-size: 1.8em"><strong>max_age</strong></span>&zwnj; &zwnj; <a href="#"><img src="https://img.shields.io/badge/kwarg%20only-%E2%9C%94-success?style=flat-square" alt="kwarg-only yes"></a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">Duration in seconds after which the invite expires. Value has to be between 0 (Unlimited) and 604800 (7 days).<br><br>Type: <code>int</code><br>Default: <code>86400 (24 hrs)</code></td>
+<td align="left">Duration in seconds after which the invite expires. Value has to be between 0 (Unlimited) and 604800 (7 days).<br><br><strong>Type:</strong> <code>int</code><br><strong>Default:</strong> <code>86400 (24 hrs)</code></td>
 </tr>
 </tbody>
 </table>
 <table>
 <thead>
 <tr>
-<th align="left"><span style="font-size: 1.8em"><strong>max_uses</strong></span></th>
+<th align="left"><span style="font-size: 1.8em"><strong>max_uses</strong></span>&zwnj; &zwnj; <a href="#"><img src="https://img.shields.io/badge/kwarg%20only-%E2%9C%94-success?style=flat-square" alt="kwarg-only yes"></a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">ID of the voice channel that the invite link will point at.<br><br>Type: <code>int</code><br>Default: <code>0 (unlimited)</code></td>
+<td align="left">ID of the voice channel that the invite link will point at.<br><br><strong>Type:</strong> <code>int</code><br><strong>Default:</strong> <code>0 (unlimited)</code></td>
 </tr>
 </tbody>
 </table>
@@ -833,7 +897,7 @@ If you see a bug with Poker Night or Chess in the Park, you can report it on Dis
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.8397ff9e.min.js", "version": {"provider": "mike", "default": "stable"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.8397ff9e.min.js", "version": {"provider": "mike", "default": "stable"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.f89c2efe.min.js"></script>
