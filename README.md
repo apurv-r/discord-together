@@ -19,7 +19,7 @@
 
 ### Use the [docs for discord-together](https://docs.discord-together.ml/) for detailed usage guide.
 <br>
-<h4>As of  v1.1.2, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
+<h4>As of the latest release, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
 <br>
 
 # 🔩 Installation
@@ -28,31 +28,34 @@
 pip install discord-together
 ```
 
-#### Package dependencies only include [discord.py](https://pypi.org/project/discord.py/)
+#### Package dependencies only include [aiohttp](https://pypi.org/project/aiohttp/)
 <br>
 
 # 🔑 Features
+- No dependencies, works with any fork of discord.py
 - Easy to use and lightweight
 - Actively maintained and updated with latest activites
-
-- Dynamic error handling with custom errors
 - Debug mode for invalid invites
 
 <br>
 
 # 💻 Code example
-This is a simple example of code using this package.
+This is a simple example of code using this package (with discord.py 1.7.2) to create an invite for a YouTube Watch Together in the channel that the command invoker is currently in.
 
 ```py
 from discord.ext import commands
-from discordTogether import DiscordTogether
+from discord_together import DiscordTogether
 
 client = commands.Bot(command_prefix="~")
-togetherControl = DiscordTogether(client)
+
+@client.event
+async def on_ready():
+    client.togetherControl = await DiscordTogether("BOT_TOKEN_HERE")
+    print('Bot is online!')
 
 @client.command()
-async def startYT(ctx):
-    link = await togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
+async def start(ctx):
+    link = await client.togetherControl.create_link(ctx.author.voice.channel.id, 'youtube')
     await ctx.send(f"Click the blue link!\n{link}")
 
 client.run("BOT_TOKEN_HERE")
@@ -82,10 +85,10 @@ At least one person needs to click on the <strong>BLUE LINK</strong>, not the 'P
 
 If you have any problems or enquiries, join the [discord-together Support Server](https://discord.gg/2fbyXn2hJV) or you can contact me personally on Discord: `Bxllistic#4444`.
 
-This project was converted to support discord.py from the npm package [discord-together](https://www.npmjs.com/package/discord-together) made by [RemyK888](https://github.com/RemyK888)
+This project was converted to support python from the npm package [discord-together](https://www.npmjs.com/package/discord-together)
 
 <br>
 <hr>
 
-## **Made with ❤ by Bxllistic#4444**
-Credits to [@RemyK888](https://github.com/RemyK888) for application IDs and foundations
+## **Made with ❤ by Bxllistic**
+ Credits to [@RemyK888](https://github.com/RemyK888) for initial foundations
