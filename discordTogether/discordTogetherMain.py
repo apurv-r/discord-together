@@ -1,14 +1,11 @@
 from aiohttp import ClientSession
-from discord import Client, AutoShardedClient
-from discord.ext.commands import Bot, AutoShardedBot, BotMissingPermissions
-from discord.http import Route
 from typing import Union, Optional
-from .errors import InvalidChannelID, InvalidActivityChoice, InvalidCustomID, RangeExceeded
+from .errors import *
 
 
 defaultApplications = { 
     # Credits to RemyK888
-    'youtube': '755600276941176913',
+    'youtube': '880218394199220334',
     'poker': '755827207812677713',
     'betrayal': '773336526917861400',
     'fishing': '814288819477020702',
@@ -19,53 +16,47 @@ defaultApplications = {
     'doodle-crew': '878067389634314250'
 }
 
-class ActivityLink:
-    """
-    Holds three variations of the invite link. Without any attributes, returns complete http link (https://discord.gg/invite_code)
-    ----------
-    Attributes
-    - short_link
-        Returns (discord.gg/invite_code)
-    - raw_code
-        Returns (raw_code)
-    """
-    def __init__(self, inviteCode : str):
-        self.raw_code = inviteCode
-        self.short_link = f"discord.gg/{inviteCode}"
-    def __str__(self):
-        return f"https://discord.gg/{self.raw_code}"
 
-class DiscordTogether:
+class AsyncObject(object):
+    async def __new__(cls, *a, **kw):
+        instance = super().__new__(cls)
+        await instance.__init__(*a, **kw)
+        return instance
+
+    async def __init__(self):
+        pass
+
+class DiscordTogether(AsyncObject):
     """
     Controls invite generations.
     
     Parameters
     ----------
-    client/bot: Union[:class:`discord.Client`, :class:`discord.AutoShardedClient`, :class:`commands.Bot`, :class:`commands.AutoShardedBot`]
-        The client/bot variable used for your project
+    token: str
+        The token used by your bot.
     debug: :class:`bool` 
         (default = False) Debug mode toggle
     
     Methods
     -------
-    create_link(voiceChannelID : int, option : str)
+    create_link(voiceChannelID : int, option : str, *, max_age : Optional[int], max_uses : Optional[int])
 
     Attributes
     -------
     default_choices
-        Gives all the default application choices that you have
+        Gives all the default application choices that you have as a list
     """
 
     default_choices = list(defaultApplications.keys())
 
-    def __init__(self, client: Union[Client, Bot, AutoShardedClient, AutoShardedBot], *, debug: Optional[bool] = False):
+    async def __init__(self, token: str, *, debug: Optional[bool] = False):
         """
         Controls invite generations.
 
         Parameters
         ----------
-        client: Union[:class:`discord.Client`, :class:`discord.ext.Bot`]
-            The client/bot variable used for your project
+        token: str
+            The token used by your bot.
         debug: Optional[:class:`bool`]
             Debug mode toggle, used to identify error code in case of invalid invite links.
             Default value is false.
@@ -75,11 +66,13 @@ class DiscordTogether:
         create_link(voiceChannelID : int, option : str, *, max_age : Optional[int], max_uses : Optional[int])
             Creates a invite link
         """
+        
+        self._session = ClientSession()
 
-        if isinstance(client, (Client, AutoShardedClient, Bot, AutoShardedBot)):
-            self.client = client
+        if isinstance(token, str):
+            self.token = token
         else:
-            raise ValueError("The client/bot object parameter is not valid.")
+            raise TypeError(f"'token' parameter MUST be of type string, not a {type(token).__name__!r} type.")
         
         if isinstance(debug, bool):
             self.debug = debug
@@ -87,8 +80,10 @@ class DiscordTogether:
             self.debug = False
             print('\033[93m'+"[WARN] (discord-together) Debug parameter did not receive a bool object. Reverting to Debug = False."+'\033[0m') 
         
+    async def close(self):
+        await self._session.close()
     
-    async def create_link(self, voiceChannelID: Union[int,str], option: Union[int,str], *, max_age: Optional[int] = 0, max_uses: Optional[int] = 0) -> ActivityLink:
+    async def create_link(self, voiceChannelID: Union[int,str], option: Union[int,str], *, max_age: Optional[int] = 0, max_uses: Optional[int] = 0) -> str:
         """
         Generates an invite link to a VC with the Discord Party VC Feature.
 
@@ -107,8 +102,8 @@ class DiscordTogether:
         
         Returns
         ----------
-        :class:`ActivityLink`
-            A class that contains the discord invite link which, upon clicked, starts the custom activity in the VC. 
+        :class:`str`
+            Contains the discord invite link which, upon clicked, starts the custom activity in the VC. 
         """
         
         # Type checks
@@ -119,9 +114,9 @@ class DiscordTogether:
         
         # Max Range checks
         if not 0 <= max_age <= 604800:
-            raise RangeExceeded(f'max_age parameter value should be an integer between 0 and 604800')
+            raise RangeExceeded(f'max_age argument value should be an integer between 0 and 604800')
         if not 0 <= max_uses <= 100:
-            raise RangeExceeded(f'max_uses parameter value should be an integer between 0 and 100')
+            raise RangeExceeded(f'max_uses argument value should be an integer between 0 and 100')
 
         # Pre Defined Application ID
         if option and (str(option).lower().replace(" ", "") in defaultApplications.keys()):   
@@ -135,37 +130,30 @@ class DiscordTogether:
                 'validate': None
             }
             
-            try:
-                result = await self.client.http.request(
-                    Route("POST", f"/channels/{voiceChannelID}/invites"), json = data
-                )
-            #Error Handling
-            except Exception as e:
-                if self.debug:
-                    async with ClientSession() as session:  
-                        async with session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
-                                        json=data, 
-                                        headers = {
-                                            'Authorization': f'Bot {self.client.http.token}',
-                                            'Content-Type': 'application/json'
-                                        }
-                                    ) as resp:
-                            result = await resp.json()
-                    print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+str(result))
-
-                if e.code == 10003 or "channel_id: snowflake value" in e.text:
-                    raise InvalidChannelID("Voice Channel ID is invalid.")
-                elif e.code == 50013:
-                    raise BotMissingPermissions(["CREATE_INSTANT_INVITE"])  
-                elif e.code == 130000:
-                    raise ConnectionError("API resource is currently overloaded. Try again a little later.")      
-                else:
-                    raise ConnectionError(f"[status: {e.status}] (code: {e.code}) : An unknown error occurred while retrieving data from Discord API.")
+            async with self._session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
+                    json=data, 
+                    headers = {
+                        'Authorization': f'Bot {self.token}',
+                        'Content-Type': 'application/json'
+                    }) as resp:
+                resp_code = resp.status
+                result = await resp.json()
 
             if self.debug:
-                print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+str(result))
+                print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+'HTTP RESPONSE CODE: '+str(resp_code)+'\n'+str(result))
             
-            return ActivityLink(result['code'])
+            if resp_code == 429:
+                raise ConnectionError('You are being rate limited, see Rate Limits (https://discord.com/developers/docs/topics/rate-limits).')
+            elif resp_code == 401 or resp_code == 403:
+                raise ConnectionError('The Authorization header was missing or invalid. Verify if the token you entered inside the constructor is correct.')
+            elif result['code'] == 10003 or (result['code'] == 50035 and 'channel_id' in result['errors']):
+                raise InvalidArgument(f'Voice Channel ID {str(voiceChannelID)!r} is invalid.')
+            elif result['code'] == 50013:
+                raise BotMissingPerms('Missing CREATE_INSTANT_INVITE permissions for that voice channel.')
+            elif result['code'] == 130000:
+                raise ConnectionError('API Resource is currently overloaded. Try again a little later.')
+            
+            return f"https://discord.gg/{result['code']}"
 
 
 
@@ -181,39 +169,32 @@ class DiscordTogether:
                 'validate': None
             }
 
-            try:
-                result = await self.client.http.request(
-                    Route("POST", f"/channels/{voiceChannelID}/invites"), json = data
-                )
-            # Error Handling
-            except Exception as e:
-                if self.debug:
-                    async with ClientSession() as session:  
-                        async with session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
-                                        json=data, 
-                                        headers = {
-                                            'Authorization': f'Bot {self.client.http.token}',
-                                            'Content-Type': 'application/json'
-                                        }
-                                    ) as resp:
-                            result = await resp.json()
-                    print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+str(result))
-
-                if e.code == 10003 or "channel_id: snowflake value" in e.text:
-                    raise InvalidChannelID("Voice Channel ID is invalid.")
-                elif "target_application_id" in e.text:
-                    raise InvalidCustomID(str(option).replace(" ", "")+" is an invalid custom application ID.")
-                elif e.code == 50013:
-                    raise BotMissingPermissions(["CREATE_INSTANT_INVITE"])  
-                elif e.code == 130000:
-                    raise ConnectionError("API resource is currently overloaded. Try again a little later.")      
-                else:
-                    raise ConnectionError(f"[status: {e.status}] (code: {e.code}) : An unknown error occurred while retrieving data from Discord API.")
+            async with self._session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
+                    json=data, 
+                    headers = {
+                        'Authorization': f'Bot {self.token}',
+                        'Content-Type': 'application/json'
+                    }) as resp:
+                resp_code = resp.status
+                result = await resp.json()
 
             if self.debug:
-                print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+str(result))
+                print('\033[95m'+'\033[1m'+'[DEBUG] (discord-together) Response Output:\n'+'\033[0m'+'HTTP RESPONSE CODE: '+str(resp_code)+'\n'+str(result))
+            
+            if resp_code == 429:
+                raise ConnectionError('You are being rate limited, see Rate Limits (https://discord.com/developers/docs/topics/rate-limits).')
+            elif resp_code == 401 or resp_code == 403:
+                raise ConnectionError('The Authorization header was missing or invalid. Verify if the token you entered inside the constructor is correct.')
+            elif result['code'] == 50035 and 'target_application_id' in result['errors']:
+                raise InvalidArgument(str(option).replace(" ", "")+" is an invalid custom application ID.")
+            elif result['code'] == 10003 or (result['code'] == 50035 and 'channel_id' in result['errors']):
+                raise InvalidArgument(f'Voice Channel ID {str(voiceChannelID)!r} is invalid.')
+            elif result['code'] == 50013:
+                raise BotMissingPerms('Missing CREATE_INSTANT_INVITE permissions for that voice channel.')
+            elif result['code'] == 130000:
+                raise ConnectionError('API Resource is currently overloaded. Try again a little later.')
 
-            return ActivityLink(result['code'])
-        
+            return f"https://discord.gg/{result['code']}"
+
         else:
-            raise InvalidActivityChoice("Invalid activity option chosen. You may only choose between (\"{}\") or input a custom application ID.".format('", "'.join(defaultApplications.keys())))
+            raise InvalidArgument("Invalid activity option chosen. You may only choose between (\"{}\") or input a custom application ID.".format('", "'.join(defaultApplications.keys())))
