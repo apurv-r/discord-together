@@ -1,0 +1,82 @@
+# Project information
+site_name: Discord Together 
+site_author: Apurv R
+site_description: >-
+  A python package to utilize the BETA Discord VC Party Games feature!
+# Repository
+repo_url: https://github.com/apurv-r/discord-together
+repo_name: Discord Together
+edit_uri: ""
+
+# Copyright
+copyright: Copyright &copy; 2021 Apurv R
+
+nav:
+  - Welcome: 'index.md'
+  - Getting Started:
+    - Installation: 'getting-started.md'
+    - Setup: 'setup.md'
+  - Reference:
+    - DiscordTogether: 'reference/DiscordTogether.md'
+    - create_link(): 'reference/create-link.md'
+    - Errors: 'reference/errors.md'
+    - Debug Mode: 'reference/debug-mode.md'
+  - FAQ:
+    - faq.md
+  - Changelog:
+    - changelog/logs.md
+    - How to upgrade: changelog/upgrade.md
+theme: 
+  name: material
+  logo: assets/DT-Logo-New.png
+  custom_dir: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+  palette: 
+    - media: "(prefers-color-scheme: light)"
+      primary: pink
+      accent: red
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" 
+      scheme: slate
+      primary: pink
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  favicon: assets/favicon.ico
+
+extra:
+  version:
+    provider: mike
+    default: stable
+  generator: false
+  social:
+  - icon: fontawesome/brands/github
+    link: https://github.com/apurv-r
+  - icon: fontawesome/brands/discord
+    link: https://discord.com/invite/2fbyXn2hJV
+
+extra_css:
+  - assets/css/full-width-tables.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - pymdownx.tabbed
+  - tables

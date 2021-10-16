@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extrahead %}
+  <link rel="stylesheet" href="{{ 'overrides/assets/stylesheets/main.5136944a.min.css' | url }}">
+{% endblock %}
+{% block announce %}
+  <a href="https://discord.gg/d8KFGCvUxf">
+    Join the 
+    <span class="twemoji discord">
+      {% include ".icons/fontawesome/brands/discord.svg" %}
+    </span>
+    <strong>discord support server</strong>
+    for updates!
+  </a>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'overrides/assets/javascripts/bundle.04c13cf5.min.js' | url }}"></script>
+{% endblock %}
