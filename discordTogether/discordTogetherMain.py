@@ -13,7 +13,8 @@ defaultApplications = {
     # Credits to awesomehet2124
     'letter-tile': '879863686565621790',
     'word-snack': '879863976006127627',
-    'doodle-crew': '878067389634314250'
+    'doodle-crew': '878067389634314250',
+    'spellcast': '852509694341283871'
 }
 
 
