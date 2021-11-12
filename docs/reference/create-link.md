@@ -9,7 +9,7 @@ Communicates with Discord API and returns the invite link for the specific appli
 |<span style="font-size: 1.8em">**application**</span>|
 | :---------------------------- |
 |The VC activity/application that you want to create an invite for.<br><br>**Type:** `str` (for pre-defined applications) or `int` (for custom IDs)|
-|<span style="font-size: 1.2em">_Pre-defined applications_</span><br>These are the applications/activities that currently come with the discord-together package.<br>These currently include:<table style="width:40%"><tbody><tr><td>Watch Together</td><td>**`youtube`**</td></tr><tr><td>Poker Night</td><td>**`poker`</td>**</tr><tr><td>Chess in the Park</td><td>**`chess`**</td></tr><tr><td>Betrayal.io</td><td>**`betrayal`**</td></tr><tr><td>Fishington.io</td><td>**`fishing`**</td></tr><tr><td>Letter Tile</td><td>**`letter-tile`**</td></tr><tr><td>Word Snack</td><td>**`word-snack`**</td></tr><tr><td>Doodle Crew</td><td>**`doodle-crew`**</td></tr></tbody></table>Use the text in the (brackets) as the application parameter<br><br><br><span style="font-size: 1.2em">_Custom application IDs_</span><br>This is a advanced feature brought by the package which allows you to create links for applications that may not be included default. This option requires you to have the ID for the application. For example, YouTube Together uses the ID `880218394199220334`.<br>So, if you do have the ID, you can use this option in the format that will be coming up under Examples.|
+|<span style="font-size: 1.2em">_Pre-defined applications_</span><br>These are the applications/activities that currently come with the discord-together package.<br>These currently include:<table style="width:40%"><tbody><tr><td>Watch Together</td><td>**`youtube`**</td></tr><tr><td>Poker Night</td><td>**`poker`</td>**</tr><tr><td>Chess in the Park</td><td>**`chess`**</td></tr><tr><td>Betrayal.io</td><td>**`betrayal`**</td></tr><tr><td>Fishington.io</td><td>**`fishing`**</td></tr><tr><td>Letter Tile</td><td>**`letter-tile`**</td></tr><tr><td>Word Snack</td><td>**`word-snack`**</td></tr><tr><td>Doodle Crew</td><td>**`doodle-crew`**</td></tr><tr><td>SpellCast</td><td>**`spellcast`**</td></tr><tr><td>Awkword</td><td>**`awkword`**</td></tr><tr><td>Checkers in the Park</td><td>**`checkers`**</td></tr></tbody></table>Use the text in the (brackets) as the application parameter<br><br><br><span style="font-size: 1.2em">_Custom application IDs_</span><br>This is a advanced feature brought by the package which allows you to create links for applications that may not be included default. This option requires you to have the ID for the application. For example, YouTube Together uses the ID `880218394199220334`.<br>So, if you do have the ID, you can use this option in the format that will be coming up under Examples.|
 
 |<span style="font-size: 1.8em">**max_age**</span>&zwnj; &zwnj; <a href="#"><img src="https://img.shields.io/badge/kwarg%20only-%E2%9C%94-success?style=flat-square" alt="kwarg-only yes"></a>|
 | :---------------------------- |
@@ -22,7 +22,7 @@ Communicates with Discord API and returns the invite link for the specific appli
 <hr>
 
 ## Returns
-A `str` containing the invite link you requested for. (https://discord.gg/`invite_code_here`)
+A `str` containing the invite link you requested for. (`https://discord.gg/INVITE_CODE_HERE`)
 
 <hr>
 

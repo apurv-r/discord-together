@@ -1,5 +1,14 @@
 # Logs
 
+## v1.2.2 <small>- 2021/11/06</small>
+* Added 2 new activities
+    * > Awkword (awkword)
+    * > Checkers in the Park (checkers)
+
+## v1.2.1 <small>- 2021/10/20</small>
+* Added SpellCast to default activities
+* Fixed a bug with ConnectionError
+
 ## v1.2.0 <small>- 2021/10/15</small>
 * Rewrite of entire backend to support any fork of discord.py, now supports any fork
 * Removed ActivityLink class, replaced with string output
