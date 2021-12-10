@@ -800,7 +800,7 @@
 
     <span class="nd">@commands</span><span class="o">.</span><span class="n">Cog</span><span class="o">.</span><span class="n">listener</span><span class="p">()</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="n">client</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">togetherControl</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DiscordTogether</span><span class="p">(</span><span class="s2">&quot;BOT_TOKEN_HERE&quot;</span><span class="p">)</span> 
         <span class="c1"># Remember to only use this if you haven&#39;t already made a bot variable for `togetherControl` in your bot.py file.</span>
         <span class="c1"># If you have already declared a bot variable for it, you can use `self.client.togetherControl` to access it&#39;s functions</span>
 
