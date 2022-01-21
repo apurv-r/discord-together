@@ -11,10 +11,9 @@ defaultApplications = {
     'fishing': '814288819477020702',
     'chess': '832012774040141894',
     
-    # Credits to awesomehet2124
-    'letter-tile': '879863686565621790',
+    'letter-league': '879863686565621790',
     'word-snack': '879863976006127627',
-    'doodle-crew': '878067389634314250',
+    'sketch-heads': '902271654783242291',
 
     'spellcast': '852509694341283871',
     'awkword': '879863881349087252',
@@ -149,7 +148,7 @@ class DiscordTogether(AsyncObject):
             
             if resp_code == 429:
                 raise ConnectionError('You are being rate limited, see Rate Limits (https://discord.com/developers/docs/topics/rate-limits).')
-            elif resp_code == 401 or resp_code == 403:
+            elif resp_code == 401:
                 raise ConnectionError('The Authorization header was missing or invalid. Verify if the token you entered inside the constructor is correct.')
             elif result['code'] == 10003 or (result['code'] == 50035 and 'channel_id' in result['errors']):
                 raise InvalidArgument(f'Voice Channel ID {str(voiceChannelID)!r} is invalid.')
@@ -188,7 +187,7 @@ class DiscordTogether(AsyncObject):
             
             if resp_code == 429:
                 raise ConnectionError('You are being rate limited, see Rate Limits (https://discord.com/developers/docs/topics/rate-limits).')
-            elif resp_code == 401 or resp_code == 403:
+            elif resp_code == 401:
                 raise ConnectionError('The Authorization header was missing or invalid. Verify if the token you entered inside the constructor is correct.')
             elif result['code'] == 50035 and 'target_application_id' in result['errors']:
                 raise InvalidArgument(str(option).replace(" ", "")+" is an invalid custom application ID.")
