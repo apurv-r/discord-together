@@ -57,7 +57,7 @@ class YoutubeTogetherCog(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
-        self.togetherControl = await DiscordTogether(client) 
+        self.togetherControl = await DiscordTogether("BOT_TOKEN_HERE") 
         # Remember to only use this if you haven't already made a bot variable for `togetherControl` in your bot.py file.
         # If you have already declared a bot variable for it, you can use `self.client.togetherControl` to access it's functions
     
