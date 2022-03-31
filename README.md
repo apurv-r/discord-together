@@ -10,15 +10,11 @@
         <a href="https://docs.discord-together.ml"><img src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=docs&logo=Read%20the%20Docs&up_color=%23EF0BB9&up_message=online&url=https%3A%2F%2Fdocs.discord-together.ml&logoColor=fc2a95"></a>
     </div>
 </div>
-<br>
-<br>
 
-# 👋 Welcome!
-<h3>Discord has released a BETA feature that they call Discord Party Games to only a certain hand-picked servers. This module allows you to temporarily enable such features for your servers!</h3>
-<br>
+<h3>Discord has released a BETA feature that they call Discord Party Games or Activities, which allows members to play a large variety of games within a server voice channel. While this feature has officially only been provided to certain hand-picked servers, this module allows you to temporarily enable such features for your servers!</h3>
 
 ### Use the [docs for discord-together](https://docs.discord-together.ml/) for detailed usage guide.
-<br>
+
 <h4>As of the latest release, this BETA feature is only supported on web and updated PC app versions of Discord and is not supported on mobile.</h4>
 <br>
 
