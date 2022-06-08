@@ -20,6 +20,7 @@ defaultApplications = {
     'blazing-8s': '832025144389533716',
     'land-io': '903769130790969345',
     'putt-party': '945737671223947305',
+    'bobble-league': '947957217959759964',
 }
 
 
@@ -136,7 +137,7 @@ class DiscordTogether(AsyncObject):
                 'validate': None
             }
             
-            async with self._session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
+            async with self._session.post(f"https://discord.com/api/v10/channels/{voiceChannelID}/invites",
                     json=data, 
                     headers = {
                         'Authorization': f'Bot {self.token}',
@@ -175,7 +176,7 @@ class DiscordTogether(AsyncObject):
                 'validate': None
             }
 
-            async with self._session.post(f"https://discord.com/api/v8/channels/{voiceChannelID}/invites",
+            async with self._session.post(f"https://discord.com/api/v10/channels/{voiceChannelID}/invites",
                     json=data, 
                     headers = {
                         'Authorization': f'Bot {self.token}',
