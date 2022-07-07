@@ -7,8 +7,6 @@ defaultApplications = {
     # Credits to RemyK888
     'youtube': '880218394199220334',
     'poker': '755827207812677713',
-    'betrayal': '773336526917861400',
-    'fishing': '814288819477020702',
     'chess': '832012774040141894',
     # ---
     'letter-league': '879863686565621790',
@@ -21,6 +19,7 @@ defaultApplications = {
     'land-io': '903769130790969345',
     'putt-party': '945737671223947305',
     'bobble-league': '947957217959759964',
+    'ask-away': '976052223358406656',
 }
 
 
