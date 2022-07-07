@@ -28,7 +28,7 @@ pip install discord-together
 <br>
 
 # 🔑 Features
-- No dependencies, works with any fork of discord.py
+- No specific API wrapper dependencies, works with discord.py and any of its forks
 - Easy to use and lightweight
 - Actively maintained and updated with latest activites
 - Debug mode for invalid invites
