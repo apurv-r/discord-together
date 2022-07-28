@@ -20,6 +20,7 @@ defaultApplications = {
     'putt-party': '945737671223947305',
     'bobble-league': '947957217959759964',
     'ask-away': '976052223358406656',
+    'know-what-i-meme': '950505761862189096',    
 }
 
 
